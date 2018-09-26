@@ -1,0 +1,27 @@
+/*
+ * Base styles
+ */
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.content-wrapper {
+    display: grid;
+    grid-gap: 1em;
+}
+
+div#main-content {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+footer#footer {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+/* 
+ * Typography
+ */
