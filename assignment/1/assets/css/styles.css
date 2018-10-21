@@ -3,14 +3,56 @@
  */
 
 html, body {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
     background-color: #FFF;
+    --colour_primary: red;
+    --colour_secondary: #C3C3C3;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Lists are boring */
+ul {
+    display: flex;
+    list-style: none;
+}
+ul li {
+    justify-content: center;
+    flex-direction: row;
+    text-align: center;
+    margin: 10px auto;
+}
+
+/*
+ * Navigation
+ */
 nav {
     width: 100%;
-    display: flex;
+}
+nav::after {
+    content: '';
+    display: block;
+    width: calc(100%-20px);
+    height: calc(100%-20px);
+    background: #000;
+    box-shadow: 0 0 12px 5px #000;
+    opacity: 0.2;
+}
+
+/*
+ * Main container
+ */
+
+main {
+    margin: auto;
+    width: 50%;
+}
+
 }
 
 /*
