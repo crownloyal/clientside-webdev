@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css?family=Inconsolata|Merriweather|Open+Sans');
+
+/*
+ * Typography
+ */
+
+html, body {
+    font-family: 'Open Sans', serif;
+    font-size: 16px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Merriweather', serif;
+    color: var(--colour_primary);
+    margin: 0 0 1em 0;
+    font-size: 1.4em;
+}
+h1 {
+    font-size: 8em;
+}
+h2 {
+    font-size: 4em;
+}
+
+p, a, quote {
+    font-size: 0.8em;
+}
+
+a:visited, a:hover {
+    color: var(--colour_base-black);
+}
+
+article h2 + div, .date {
+    font-family: 'Inconsolata', monospace;
+    text-transform: uppercase;
+}
+
+/*
+ * Date
+ */
+
+.date {
+    line-height: 1.2em;
+}
+
+ul.date > .day {
+    font-size: 1.7em;
+}
+ul.date > .month {
+    font-size: 1.2em;
+}
+ul.date > .year {
+    font-size: 0.9em;
+}
+
+
+/*
+ * Article related
+ */
+
+article h2::first-letter {
+    color: var(--colour_base-white);
+    background-color: var(--colour_primary);
+}
+
+article h2 + div {
+    margin: 1em 0;
+    padding: 1em 0;
+    border-top: 2px solid var(--colour_base-black);
+    border-bottom: 2px solid var(--colour_base-black);
+}
+
+.picture .caption {
+    color: var(--colour_base-white);
+}

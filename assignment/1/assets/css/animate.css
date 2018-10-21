@@ -1,0 +1,7 @@
+.picture .caption {
+    transform: translateY(102%);
+    transition: all 0.1s;
+}
+.picture:hover .caption {
+    transform: translateY(0%);
+}
