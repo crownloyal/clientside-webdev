@@ -5,23 +5,21 @@
 html, body {
     margin: 0;
     padding: 0;
+    background-color: #FFF;
 }
 
-.content-wrapper {
-    display: grid;
-    grid-gap: 1em;
+nav {
+    width: 100%;
+    display: flex;
 }
 
-div#main-content {
-    grid-column: 1;
-    grid-row: 2;
-}
-
-footer#footer {
-    grid-column: 1;
-    grid-row: 2;
-}
-
-/* 
+/*
  * Typography
  */
+
+ h1, h2, h3, h4, h5, h6 {
+    font-family: "Times New Roman", serif;
+ }
+html, body {
+    font-family: "Arial", sans-serif;
+}
