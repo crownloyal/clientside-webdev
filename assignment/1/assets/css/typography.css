@@ -58,7 +58,7 @@ nav * a {
 }
 
 ul.date > .day {
-    font-size: 1.7em;
+    font-size: 1.8em;
 }
 ul.date > .month {
     font-size: 1.2em;
@@ -87,4 +87,5 @@ article h2 + div {
 
 .picture .caption {
     color: var(--colour_base-white);
+    font-size: 2em;
 }

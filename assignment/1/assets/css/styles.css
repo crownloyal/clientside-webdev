@@ -149,6 +149,7 @@ ul.date li {
 }
 article:nth-child(2n+1) > .picture {
     float: right;
+    margin: 0 0 1em 1em;
 }
 
 ul.social {
@@ -157,7 +158,14 @@ ul.social {
     direction: ltr;
 }
 ul.social * a {
-    margin: 1em;
+    margin-left: 1em;
+}
+ul.social * a img {
+    opacity: 0.5;
+}
+ul.social * a:hover img {
+    opacity: 1;
+    transition: opacity 0.2s cubic-bezier(0, 0, 0.3, 1);
 }
 
 .taglabel {
