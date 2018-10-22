@@ -9,7 +9,7 @@ html, body {
     font-size: 16px;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, #banner {
     font-family: 'Merriweather', serif;
     color: var(--colour_primary);
     margin: 0 0 1em 0;
@@ -22,8 +22,9 @@ h2 {
     font-size: 4em;
 }
 
-p, a, quote {
+p, a, quote, l {
     font-size: 0.8em;
+    text-align: justify;
 }
 
 a:visited, a:hover {
@@ -33,6 +34,19 @@ a:visited, a:hover {
 article h2 + div, .date {
     font-family: 'Inconsolata', monospace;
     text-transform: uppercase;
+}
+
+article > p:last-child {
+    clear: both;
+}
+
+/*
+ * Navigation
+ */
+
+nav * a {
+    text-decoration: none;
+    margin: 5px;
 }
 
 /*
@@ -68,6 +82,7 @@ article h2 + div {
     padding: 1em 0;
     border-top: 2px solid var(--colour_base-black);
     border-bottom: 2px solid var(--colour_base-black);
+    /* display: flex; */
 }
 
 .picture .caption {

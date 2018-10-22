@@ -1,6 +1,6 @@
 .picture .caption {
     transform: translateY(102%);
-    transition: all 0.1s;
+    transition: all 0.25s cubic-bezier(0, 0, 0.3, 1);
 }
 .picture:hover .caption {
     transform: translateY(0%);
