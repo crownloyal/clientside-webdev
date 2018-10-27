@@ -41,7 +41,7 @@ ul li {
 nav {
     /* opacity: 0.8; */
     width: 100%;
-    position: sticky;
+    position: fixed;
     z-index: 1;
     top: 0;
     background: var(--colour_base-white);
@@ -82,6 +82,7 @@ nav * li:hover::after {
 
 main {
     margin: auto;
+    padding-top: 4em;
     width: 50vw;
 }
 
