@@ -1,0 +1,36 @@
+<!DOCTYOE html>
+
+<html>
+	<head>
+		<link rel="stylesheet" href="./assets/css/style.css">
+	</head>
+	<body>
+		<main>
+			<button id="button-settings">Settings</button>
+			<div class="machine flex-container__centre-flex">
+				<div class="machine__slot-container flex-conatiner__flex-row">
+					<div class="machine__slot-rotator"><img src="./assets/img/sprite2.png" alt="Slot item 1"></div>
+					<div class="machine__slot-rotator"><img src="./assets/img/sprite2.png" alt="Slot item 2"></div>
+					<div class="machine__slot-rotator"><img src="./assets/img/sprite2.png" alt="Slot item 3"></div>
+				</div>
+			</div>
+			<button id="button-trigger">GO!</button>
+		</main>
+		<aside id="overlay">
+			<div class="overlay__menu-container">
+				<h3>Slot machine options</h3>
+				<div id="overlay__menu-options" class="flex-container__centre-column">
+					<div>
+						<input type="checkbox" name="theme-selection" id="theme-selection">
+						<label for="theme-selection">Monochrome</label>
+					</div>
+					<div class="flex-container__centre-flex">
+						<button id="menu-close">Close</button>
+					</div>
+				</div>
+			</div>
+		</aside>
+		<script src="./assets/js/menu.js"></script>
+		<script src="./assets/js/slotmachine.js"></script>
+	</body>
+</html>
