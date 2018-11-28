@@ -52,7 +52,7 @@ class Menu {
 	}
 
 	colourToggle() {
-		if(this.state.isMono) {
+		if(this.state.isAltStyled) {
 			__mono(this);
 		} else {
 			__coloured(this);
