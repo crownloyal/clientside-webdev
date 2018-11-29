@@ -1,0 +1,30 @@
+main {
+	transition: background 0.2s cubic-bezier(0, 0, 0.3, 1);
+}
+
+/* Machine */
+
+.machine__slot-rotator.start-rotating > img {
+	transition: transform 0.2s cubic-bezier(0.725, 0.4, 1, 1);
+	transform: translateY(-100%);
+}
+.machine__slot-rotator.stop-rotating > img {
+	transition: transform 0.2s cubic-bezier(1, 0.4, 0, 0) 0s;
+	transform: translateY(-20%);
+}
+
+/* Overlay */
+
+#overlay {
+	transition: opacity 0.2s cubic-bezier(0, 0, 0.3, 1);
+}
+#overlay input::before {
+	transition: background 0.2s cubic-bezier(0, 0, 0.3, 1);
+}
+#overlay input::after {
+	transform: translateX(1px);
+	transition: transform 0.2s cubic-bezier(0, 0, 0.3, 1);
+}
+#overlay input:checked::after {
+	transform: translateX(24px);
+}
