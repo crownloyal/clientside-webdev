@@ -33,6 +33,10 @@ h1, h2, h3, h4, h5, h6 {
 	font-family: 'Merriweather', serif;
 }
 
+button {
+	all: unset;
+}
+
 /* Slot */
 
 main {
@@ -77,21 +81,21 @@ main.winner::before {
 	will-change: transform;
 
 	transform: translateY(0);
+	transition: transform 0.6s cubic-bezier(0,0,0.3,1);
 }
-.machine__slot-rotator > img::before {
-	content: '';
-	display: block;
-	position: absolute;
-	z-index: inherit;
 
-	width: 100px;
-	height: 100px;
-
-	transform: translateY(100%);
-
-	background: url(../img/sprite2.png);
-	background-size: cover;
-    background-position: left center;
+.machine__slot-rotator.rotating > img {
+	animation: rolling 0s infinite linear;
+	animation-duration: 0.5s;
+}
+@keyframes rolling {
+	0% {
+		/* We don't want it to start all the way off-screen */
+		transform: translateY(2%);
+	}
+	100% {
+		transform: translateY(-80%);
+	}
 }
 
 .machine__slot-rotator.position-0 > img {
@@ -115,6 +119,39 @@ button#button-settings {
 	z-index: 3;
 	top: 2em;
 	left: 2em;
+	transform: scale(2);
+}
+button#button-settings::after {
+	content: '⚙️'
+}
+
+button#button-trigger {
+	display: block;
+	width: 32px;
+	height: 32px;
+	background: #DDD;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+button#button-trigger::before {
+	content: '';
+	display: block;
+	width: 20px;
+	height: 20px;
+	background: #F3333F;
+
+	border-radius: 50%;
+	transform: translate(7px, -100px);
+}
+button#button-trigger::after {
+	content: '';
+	display: block;
+	width: 5px;
+	height: 80px;
+	background: #333;
+
+	transform: translate(14px, -100px);
+
 }
 
 /* White design */
@@ -125,8 +162,12 @@ main.alternate-style {
 main.alternate-style .machine {
 	background: #FFF;
 }
+main.alternate-style #button-trigger {
+	background: #666;
+}
 
 /* Overlay */
+
 #overlay {
 	position: fixed;
 	z-index: 2;
@@ -141,10 +182,12 @@ main.alternate-style .machine {
 }
 
 .overlay__menu-container {
-	background: white;
+	background: #666;
+	border: 3px solid white;
 	height: 200px;
 	width: 40%;
 
+	color: white;
 	padding: 2em;
 	box-shadow: 2px 2px 8px 2px rgba(50,50,50, 0.7);
 }
@@ -170,7 +213,7 @@ main.alternate-style .machine {
 	height: 23px;
 	background: coral;
 	border-radius: 10px;
-	border: 1px solid #333;
+	border: 1px solid #666;
 	box-shadow: 0 0 2px 1px rgba(100,100,100, 0.7) inset;
 }
 #overlay input:checked::before{
@@ -190,4 +233,18 @@ main.alternate-style .machine {
 	background: #333;
 	border-radius: 10px;
 	box-shadow: 1px 1px 4px 1px rgba(100,100,100, 0.7);
+}
+
+#overlay #menu-close {
+	border: 1px solid white;
+	border-radius: 50%;
+	padding: 1em;
+	width: 1em;
+	height: 1em;
+}
+#overlay #menu-close::after {
+	content: '𝗫';
+	display: block;
+	transform: translate(3px, -3px);
+	/* random not centering fonts 🙄 */
 }

@@ -30,11 +30,14 @@ class SlotMachine {
 	//  public API
   	play() {
 		this.reset();
+		this._grabTrigger();
     	this._startRotationAnimation();
     	this._assignSlotResults();
 		this._setEndposition();
-    	this._stopRotationAnimation();
-    	this._isWinner();
+		setTimeout(_ => {
+	    	this._stopRotationAnimation();
+	    	this._isWinner();
+		}, 3000);
   	}
 
   	toggleRotation() {
@@ -53,7 +56,7 @@ class SlotMachine {
 	//  Animation
 	_startRotationAnimation() {
     	this.state.isRotating = true;
-		requestAnimationFrame( frame =>
+		requestAnimationFrame(frame =>
 	    	this.selectors.nodes.forEach(element => {
 	      		element.classList.add("rotating");
     		})
@@ -62,9 +65,11 @@ class SlotMachine {
 
 	_stopRotationAnimation() {
     	this.state.isRotating = false;
-    	this.selectors.nodes.forEach(element => {
-    		element.classList.remove("rotating");
-    	});
+		requestAnimationFrame(frame =>
+	    	this.selectors.nodes.forEach(element => {
+				element.classList.remove("rotating");
+	    	})
+		);
 	}
 
 	_setEndposition() {
@@ -76,11 +81,17 @@ class SlotMachine {
 		});
 	}
 
+	_grabTrigger() {
+		requestAnimationFrame(lowerLever);
+		requestAnimationFrame(elevateLever);
+
+		function lowerLever() {}
+		function elevateLever() {}
+	}
+
 	_resizePlayArea() {
 		requestAnimationFrame(frame => this.selectors.frame.forEach(element => {
-			element.style.height = element.clientWidth + "px";
-			// element.style.width = element.clientWidth + "px";
-			console.log(element.clientHeight, element.clientWidth);
+			element.style.height = `${element.clientWidth}px`;
 		}));
 	}
 
