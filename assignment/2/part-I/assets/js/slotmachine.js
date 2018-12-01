@@ -1,139 +1,146 @@
 "use strict";
 
 class SlotMachine {
-  	constructor(options) {
-    	if (!options.button) {
-      		new Error("Please define button and rotator in an options object.");
-    	}
+    constructor(options) {
+        if (!options.button) {
+            new Error("Please define button and rotator in an options object.");
+        }
 
-    this.state = {
-      	isRotating: false,
-      	nodes: [],
-		win: false
-    };
-    this.selectors = {
-      	nodes: document.querySelectorAll(".machine__slot-rotator"),
-      	button: document.querySelector(options.button),
-      	main: document.querySelector("main"),
-		frame: document.querySelectorAll(".machine__slot-rotator")
-    };
+        this.state = {
+            nodes: [],
+            win: false
+        };
+        this.selectors = {
+            nodes: document.querySelectorAll(".machine__slot-rotator"),
+            button: document.querySelector(options.button),
+            main: document.querySelector("main"),
+            frame: document.querySelectorAll(".machine__slot-rotator")
+        };
 
-    this.init();
-  	}
+        this.init();
+    }
 
-  	init() {
-    	this._functionBinds();
-    	this._bindEvents();
-		this._resizePlayArea();
-  	}
+    init() {
+        this._functionBinds();
+        this._bindEvents();
+        this._resizePlayArea();
+    }
 
-	//  public API
-  	play() {
-		this.reset();
-		this._grabTrigger();
-    	this._startRotationAnimation();
-    	this._assignSlotResults();
-		this._setEndposition();
-		setTimeout(_ => {
-	    	this._stopRotationAnimation();
-	    	this._isWinner();
-		}, 3000);
-  	}
+    //  public API
+    play() {
+        this.reset();
+        this._grabTrigger();
 
-  	toggleRotation() {
-    	if (this.state.isRotating) {
-      		this._stopRotationAnimation();
-    	} else {
-      		this._startRotationAnimation();
-    	}
-  	}
+        this.selectors.nodes.forEach(element =>
+            this._startRotationAnimation(element)
+        );
 
-	reset() {
-		this.state.win = false;
-		this.selectors.main.classList.remove("winner");
-	}
+        this._assignSlotResults();
+        this._setEndposition();
 
-	//  Animation
-	_startRotationAnimation() {
-    	this.state.isRotating = true;
-		requestAnimationFrame(frame =>
-	    	this.selectors.nodes.forEach(element => {
-	      		element.classList.add("rotating");
-    		})
-		);
-	}
+        this.selectors.nodes.forEach((element, index) => {
+            setTimeout(_ => this._stopRotationAnimation(element), (index + 1) * 1000);
+        });
+		setTimeout(_ => this._isWinner(), 4000);
+    }
 
-	_stopRotationAnimation() {
-    	this.state.isRotating = false;
-		requestAnimationFrame(frame =>
-	    	this.selectors.nodes.forEach(element => {
-				element.classList.remove("rotating");
-	    	})
-		);
-	}
+    reset() {
+        this.state.win = false;
+        this.selectors.main.classList.remove("winner");
+    }
 
-	_setEndposition() {
-		this.selectors.nodes.forEach((element, index) => {
-			const value = this.state.nodes[index];
-			const positions = ["position-0", "position-1", "position-2", "position-3", "position-4"];
-			element.classList.remove(...positions);
-			element.classList.add("position-" + value);
-		});
-	}
+    //  Animation
+    _startRotationAnimation(node) {
+        requestAnimationFrame(frame => {
+            node.classList.add("rotating");
+        });
+    }
 
-	_grabTrigger() {
-		requestAnimationFrame(lowerLever);
-		requestAnimationFrame(elevateLever);
+    _stopRotationAnimation(node) {
+        requestAnimationFrame(frame => {
+            node.classList.remove("rotating");
+        });
+    }
 
-		function lowerLever() {}
-		function elevateLever() {}
-	}
+    _setEndposition() {
+        this.selectors.nodes.forEach((element, index) => {
+            const value = this.state.nodes[index];
+            const positions = [
+                "position-0",
+                "position-1",
+                "position-2",
+                "position-3",
+                "position-4"
+            ];
+            element.classList.remove(...positions);
+            element.classList.add("position-" + value);
+        });
+    }
 
-	_resizePlayArea() {
-		requestAnimationFrame(frame => this.selectors.frame.forEach(element => {
-			element.style.height = `${element.clientWidth}px`;
-		}));
-	}
+    _grabTrigger() {
+        const lever = this.selectors.button;
 
-	//  Utility & Logic
-	_generateRandomNumbers(max) {
-    	const pseudoRandom = Math.random() * max;
-		if(pseudoRandom < 0.5 || 4.5 < pseudoRandom) {
-			return 0;
-		}
+        requestAnimationFrame(_ => lowerLever());
+        setTimeout(_ => requestAnimationFrame(_ => elevateLever()), 2000);
 
-		return Math.round(pseudoRandom);
-  	}
+        function lowerLever() {
+            lever.classList.add("lowered-lever");
+        }
+        function elevateLever() {
+            lever.classList.remove("lowered-lever");
+        }
+    }
 
-	_assignSlotResults() {
-    	this.state.nodes[0] = this._generateRandomNumbers(5);
-    	this.state.nodes[1] = this._generateRandomNumbers(5);
-    	this.state.nodes[2] = this._generateRandomNumbers(5);
-  	}
+    _resizePlayArea() {
+        requestAnimationFrame(frame =>
+            this.selectors.frame.forEach(element => {
+                element.style.height = `${element.clientWidth}px`;
+            })
+        );
+    }
 
-  	_isWinner() {
-    	const value1 = this.state.nodes[0];
-    	const value2 = this.state.nodes[1];
-    	const value3 = this.state.nodes[2];
+    //  Utility & Logic
+    _generateRandomNumbers(max) {
+        const pseudoRandom = Math.random() * max;
+        if (pseudoRandom < 0.5 || 4.5 < pseudoRandom) {
+            return 0;
+        }
 
-    	if (! (value1 === value2 || value2 === value3 || value1 === value3)) return;
+        return Math.round(pseudoRandom);
+    }
 
-		this.state.win = true;
-		this.selectors.main.classList.add("winner");
-  	}
+    _assignSlotResults() {
+        this.state.nodes[0] = this._generateRandomNumbers(5);
+        this.state.nodes[1] = this._generateRandomNumbers(5);
+        this.state.nodes[2] = this._generateRandomNumbers(5);
+    }
 
-	//  Setup
-	_functionBinds() {
-		this.play = this.play.bind(this);
-		this._resizePlayArea = this._resizePlayArea.bind(this);
-  	}
+    _isWinner() {
+        const value1 = this.state.nodes[0];
+        const value2 = this.state.nodes[1];
+        const value3 = this.state.nodes[2];
 
-	_bindEvents() {
-		this.selectors.button.addEventListener("click", this.play);
-		window.addEventListener("resize", this._resizePlayArea);
-	}
+        if (!(value1 === value2 || value2 === value3 || value1 === value3))
+            return;
+
+        this.state.win = true;
+        this.selectors.main.classList.add("winner");
+
+		setTimeout(_ => this.selectors.main.classList.remove("winner"), 3500);
+    }
+
+    //  Setup
+    _functionBinds() {
+        this.play = this.play.bind(this);
+        this._resizePlayArea = this._resizePlayArea.bind(this);
+    }
+
+    _bindEvents() {
+        this.selectors.button.addEventListener("click", this.play);
+        window.addEventListener("resize", this._resizePlayArea);
+    }
 }
 
 new SlotMachine({
-	button: "#button-trigger"
+    button: "#button-trigger"
 });

@@ -1,8 +1,50 @@
+/* Theming */
 main {
 	transition: background 0.2s cubic-bezier(0, 0, 0.3, 1);
 }
 
+/* Winner overlay */
+main::before {
+	transition: transform 1.5s cubic-bezier(0, 0, 0.3, 1);
+}
+main.winner::before {
+	transform: translateY(0);
+}
+
 /* Machine */
+.machine__slot-rotator > img {
+	will-change: transform;
+	transition: transform 0.6s cubic-bezier(0,0,0.3,1);
+}
+
+.machine__slot-rotator.rotating > img {
+	animation: rolling 0s infinite linear;
+	animation-duration: 0.5s;
+}
+@keyframes rolling {
+	0% {
+		/* We don't want it to start all the way off-screen */
+		transform: translateY(5%);
+	}
+	100% {
+		transform: translateY(-90%);
+	}
+}
+.machine__slot-rotator.position-0 > img {
+	transform: translateY(0%);
+}
+.machine__slot-rotator.position-1 > img {
+	transform: translateY(-20%);
+}
+.machine__slot-rotator.position-2 > img {
+	transform: translateY(-40%);
+}
+.machine__slot-rotator.position-3 > img {
+	transform: translateY(-60%);
+}
+.machine__slot-rotator.position-4 > img {
+	transform: translateY(-80%);
+}
 
 .machine__slot-rotator.start-rotating > img {
 	transition: transform 0.2s cubic-bezier(0.725, 0.4, 1, 1);
@@ -16,7 +58,8 @@ main {
 /* Overlay */
 
 #overlay {
-	transition: opacity 0.2s cubic-bezier(0, 0, 0.3, 1);
+	will-change: transform;
+	transition: opacity 0.5s cubic-bezier(0, 0, 0.3, 1);
 }
 #overlay input::before {
 	transition: background 0.2s cubic-bezier(0, 0, 0.3, 1);
@@ -27,4 +70,20 @@ main {
 }
 #overlay input:checked::after {
 	transform: translateX(24px);
+}
+
+/* Lever */
+
+button#button-trigger::before {
+	transition: transform 0.2s cubic-bezier(0, 0, 0.3, 1);
+}
+button#button-trigger::after {
+	transition: height 0.2s cubic-bezier(0, 0, 0.3, 1), transform 0.2s cubic-bezier(0, 0, 0.3, 1);
+}
+button#button-trigger.lowered-lever::before {
+	transform: translate(7px, -60px);
+}
+button#button-trigger.lowered-lever::after {
+	height: 40px;
+	transform: translate(14px, -60px);
 }

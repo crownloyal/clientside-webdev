@@ -18,7 +18,8 @@ class Menu {
 			menu: document.querySelector(options.menu),
 			styleToggle: document.querySelector(options.toggle),
 			main: document.querySelector('main'),
-			menuClose: document.querySelector('#menu-close')
+			menuClose: document.querySelector('#menu-close'),
+			overlay: document.querySelector("#overlay")
 		}
 
 		this.init();
@@ -29,6 +30,7 @@ class Menu {
 		this.colourToggle = this.colourToggle.bind(this);
 		this.selectors.button.addEventListener('click', this.menuToggle);
 		this.selectors.menuClose.addEventListener('click', this.menuToggle);
+		// this.selectors.overlay.addEventListener('click', this.menuToggle); // dismisses menu on overlay click
 		this.selectors.styleToggle.addEventListener('click', this.colourToggle);
 	}
 
